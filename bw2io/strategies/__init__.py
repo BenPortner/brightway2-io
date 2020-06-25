@@ -55,6 +55,7 @@ __all__ = [
     "strip_biosphere_exc_locations",
     "tupleize_categories",
     "update_ecoinvent_locations",
+    "convert_activity_filename_to_string",
 ]
 
 
@@ -106,6 +107,7 @@ from .generic import (
     normalize_units,
     set_code_by_activity_hash,
     tupleize_categories,
+    convert_activity_filename_to_string,
 )
 from .lcia import (
     add_activity_hash_code,

@@ -7,11 +7,13 @@ from bw2io.strategies import (
     link_technosphere_by_activity_hash,
     set_code_by_activity_hash,
     tupleize_categories,
+    convert_activity_filename_to_string,
 )
 from bw2data import Database
 from copy import deepcopy
 import numpy as np
 import pytest
+import pathlib
 
 
 def test_tupleize_exchanges():
@@ -245,3 +247,8 @@ def test_drop_falsey_uncertainty_fields_but_keep_zeros():
     expected = [{'exchanges': [{'loc': False}]}]
     result = drop_falsey_uncertainty_fields_but_keep_zeros(data)
     assert result == expected
+
+def test_convert_activity_filename_to_string():
+    data = [{'filename':'C:/test.txt'}, {'filename':pathlib.Path(r'C:\test.txt')}]
+    expected = [{'filename':'C:/test.txt'}, {'filename':'C:/test.txt'}]
+    assert convert_activity_filename_to_string(data) == expected

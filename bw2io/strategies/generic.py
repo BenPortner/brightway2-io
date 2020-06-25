@@ -7,6 +7,7 @@ from copy import deepcopy
 import numbers
 import numpy as np
 import pprint
+import pathlib
 
 
 def format_nonunique_key_error(obj, fields, others):
@@ -212,4 +213,13 @@ def convert_activity_parameters_to_list(data):
         if 'parameters' in ds:
             ds['parameters'] = [_(x, y) for x, y in ds['parameters'].items()]
 
+    return data
+
+def convert_activity_filename_to_string(data):
+    for ds in data:
+        if 'filename' in ds and type(ds['filename']) is not str:
+            if isinstance(ds['filename'], pathlib.Path):
+                ds['filename'] = ds['filename'].as_posix()
+            else:
+                ds['filename'] = str(ds['filename'])
     return data
